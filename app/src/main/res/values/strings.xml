@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Cryptocurrency Price Index</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_bitcoin">Bitcoin</string>
+    <string name="title_ethereum">Ethereum</string>
+    <string name="title_neo">NEO</string>
+</resources>
