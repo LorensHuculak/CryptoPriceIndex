@@ -30,7 +30,7 @@
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
             android:textSize="22sp"
-            android:text="Click to load"
+            android:text="Please choose a Currency"
             android:gravity="center_horizontal"/>
 
     </RelativeLayout>

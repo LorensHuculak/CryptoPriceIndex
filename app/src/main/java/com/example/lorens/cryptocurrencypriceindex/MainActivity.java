@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.content.Intent;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txt;
     private ImageView img;
+    private String name;
+    private String price;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -41,12 +44,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_bitcoin:
                     loadBTC();
+                    name = "Bitcoin";
                     return true;
                 case R.id.navigation_ethereum:
                     loadETH();
+                    name = "Ethereum";
                     return true;
                 case R.id.navigation_neo:
                     loadNEO();
+                    name = "NEO";
                     return true;
             }
             return false;
@@ -75,8 +81,14 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.login) {
-            txt.setText("Extra Feature");
+        if (item.getItemId() == R.id.share) {
+            Intent myIntent = new Intent(Intent.ACTION_SEND);
+            myIntent.setType("text/plain");
+            String shareBody = "The " + name + " price has reached €" + price +"! #CryptoPriceIndex";
+            String shareSub = "Cryptocurrency Price Snapshot";
+            myIntent.putExtra(Intent.EXTRA_SUBJECT,shareBody);
+            myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+            startActivity(Intent.createChooser(myIntent,"Share using"));
         }
 
         return super.onOptionsItemSelected(item);
@@ -136,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
             txt.setText(builder.toString());
             img.setImageResource(R.drawable.bitcoin);
+            price = euroObject.getString("rate");
 
         } catch (Exception e) {
 
@@ -191,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
             txt.setText(builder.toString());
             img.setImageResource(R.drawable.ethereum);
+            price = jsonObject.getString("EUR");
 
         } catch (Exception e) {
 
@@ -245,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
 
             txt.setText(builder.toString());
             img.setImageResource(R.drawable.neo);
+            price = jsonObject.getString("EUR");
 
         } catch (Exception e) {
 
